@@ -1,6 +1,6 @@
 FROM ubuntu:15.10
 RUN apt-get update
-RUN apt-get install -y unzip wget libffi-dev libssl-dev build-essential python-dev python-pip
+RUN apt-get install -y unzip wget libffi-dev libssl-dev build-essential python-dev python-pip vim
 RUN easy_install -U pip
 RUN wget -q -O terraform.zip https://releases.hashicorp.com/terraform/0.6.15/terraform_0.6.15_linux_amd64.zip
 RUN unzip terraform.zip -d /usr/local/bin
@@ -20,3 +20,5 @@ RUN pip install python-swiftclient
 RUN pip install python-troveclient
 RUN pip install python-tuskarclient
 RUN pip install python-openstackclient
+ADD requirements.txt .
+RUN pip install -r requirements.txt
