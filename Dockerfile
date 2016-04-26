@@ -22,3 +22,4 @@ RUN pip install python-tuskarclient
 RUN pip install python-openstackclient
 ADD requirements.txt .
 RUN pip install -r requirements.txt
+RUN chmod u+x /usr/local/bin/ansible
