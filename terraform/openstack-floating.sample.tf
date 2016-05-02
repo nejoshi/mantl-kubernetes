@@ -11,6 +11,7 @@ variable datacenter {}
 variable floating_pool {}
 variable external_net_id {}
 variable subnet_cidr {}
+variable subnet_dhcp_enable { default = "false" }
 variable master_count {}
 variable node_count {}
 variable ssh_user {}
@@ -47,6 +48,7 @@ module "k8s-hosts-floating" {
   floating_pool = "${ var.floating_pool }"
   external_net_id = "${ var.external_net_id }"
   subnet_cidr = "${ var.subnet_cidr }"
+  subnet_dhcp_enable = "${ var.subnet_dhcp_enable }"
   ssh_user = "${ var.ssh_user }"
   short_name = "${ var.short_name }"
   host_domain = "${ var.host_domain }"

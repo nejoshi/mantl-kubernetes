@@ -9,13 +9,11 @@ variable security_groups {  }
 variable floating_pool {}
 variable external_net_id { }
 variable subnet_cidr { default = "10.10.10.0/24" }
+variable subnet_dhcp_enable { default = "false" }
 variable ip_version { default = "4" }
 variable short_name { default = "k8s" }
 variable host_domain { default = "novalocal" }
 variable ssh_user { default = "centos" }
-variable router { default = "" }
-variable network { default = "" }
-variable subnet_enable_dhcp { default = "true" }
 
 resource "template_file" "cloud-init-master" {
   count         = "${ var.master_count }"
@@ -86,7 +84,7 @@ resource "openstack_compute_floatingip_v2" "ms-node-floatip" {
 }
 
 resource "openstack_networking_network_v2" "ms-network" {
-  name = "${ var.network }"
+  name = "${ var.short_name }-network"
 }
 
 resource "openstack_networking_subnet_v2" "ms-subnet" {
@@ -94,11 +92,11 @@ resource "openstack_networking_subnet_v2" "ms-subnet" {
   network_id    = "${ openstack_networking_network_v2.ms-network.id }"
   cidr          = "${ var.subnet_cidr }"
   ip_version    = "${ var.ip_version }"
-  enable_dhcp   = "${ var.subnet_enable_dhcp }"
+  enable_dhcp   = "${ var.subnet_dhcp_enable }"
 }
 
 resource "openstack_networking_router_v2" "ms-router" {
-  name             = "${ var.router }"
+  name             = "${ var.short_name }-router"
   external_gateway = "${ var.external_net_id }"
 }
 

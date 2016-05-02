@@ -17,6 +17,8 @@
     name: "{{ item }}"
     enabled: false
     state: stopped
+  register: command_result
+  failed_when: "command_result|failed and 'could not find' not in command_result.msg"
   with_items:
     - firewalld
     - iptables-services
