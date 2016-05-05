@@ -1,6 +1,6 @@
 FROM ubuntu:15.10
-RUN apt-get update
-RUN apt-get install -y unzip wget curl libffi-dev libssl-dev build-essential python-dev python-pip vim ruby-full ssh
+RUN apt-get update && apt-get install -y
+RUN apt-get install -y unzip wget curl libffi-dev libssl-dev build-essential python-dev python-pip vim ruby-full ssh ruby-serverspec bundler
 RUN easy_install -U pip
 RUN wget -q -O terraform.zip https://releases.hashicorp.com/terraform/0.6.15/terraform_0.6.15_linux_amd64.zip
 RUN unzip terraform.zip -d /usr/local/bin
